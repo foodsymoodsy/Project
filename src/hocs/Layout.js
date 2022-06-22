@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import { connect } from 'react-redux';
@@ -17,6 +17,17 @@ import imge3 from './Cream cheese and avocado roll.jpg';
 import { makeStyles } from '@material-ui/core';
 import '../index.css';
 import image from './homePagepic.png';
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import Slider from "react-slick";
+import CardHeader from '@mui/material/CardHeader';
+import CardActions from '@mui/material/CardActions';
+import Collapse from '@mui/material/Collapse';
+import IconButton from '@mui/material/IconButton';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
+import { styled } from '@mui/material/styles';
+import { useNavigate } from "react-router-dom";
 
 const useStyles = makeStyles(theme => ({
     // centered: {
@@ -26,36 +37,43 @@ const useStyles = makeStyles(theme => ({
     //     transform: 'translate(-50% -50%)',
     //     fontSize: '100px'
     // }
-    cardLayout:{
-        marginLeft:'30px',
-        
+    cardLayout: {
+        marginLeft: '30px',
+
     },
-    cardLayout1:{
-        marginLeft:'10px',
-        
+    cardLayout1: {
+        marginLeft: '10px',
+
     },
-    cardL:{
-        borderRadius:'10px',
-        height:'95%'
+    cardL: {
+        borderRadius: '10px',
+        height: '95%'
     },
-    suTheme:{
+    suTheme: {
         fontFamily: "Gotham",
-        color:'#F25C05',
-        marginTop:'70px',
+        color: '#F25C05',
+        marginTop: '70px',
         marginLeft: '30px',
         marginRight: '10px',
         letterSpacing: '3px',
-        fontSize:'3em'
+        fontSize: '3em'
     },
-    imgTheme:{
-        marginTop:'40px'
+    imgTheme: {
+        marginTop: '40px'
     }
-  
+
 }))
 
 const Layout = (props) => {
     const classes = useStyles();
-   
+    const navigate = useNavigate();
+    const [index, setIndex] = useState(0);
+
+    const handleSelect = (selectedIndex, e) => {
+        setIndex(selectedIndex);
+    };
+
+
     let location = useLocation();
     useEffect(() => {
         const values = queryString.parse(location.search);
@@ -72,24 +90,54 @@ const Layout = (props) => {
             props.load_user();
         }
     }, [location]);
+    const ExpandMore = styled((props) => {
+        const { expand, ...other } = props;
+        return <IconButton {...other} />;
+    })(({ theme, expand }) => ({
+        transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
+        marginLeft: 'auto',
+        transition: theme.transitions.create('transform', {
+            duration: theme.transitions.duration.shortest,
+        }),
+    }));
+    const [expanded, setExpanded] = React.useState(false);
+
+    const handleExpandClick = () => {
+        setExpanded(!expanded);
+    };
+    const handleClick = (e) =>{
+        e.preventDefault()
+        let id = e.target.id;
+        navigate("/recommended_food_for_mood/"+id);
+    }
+    const settings = {
+        // className: "center",
+        dots: true,
+        infinite: true,
+        speed: 500,
+        // centerPadding: "60px",
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        cssEase: "linear"
+    }
     return (
         <div>
             <Navbar />
-            <br/>
-            <br/>
-            <br/>
+            <br />
+            <br />
+            <br />
             <Grid container >
                 <Grid item xs={6}>
                     <Grid item xs={3} lg={3}>
-                    <span className='h1Theme'>How</span>
-                    <span className='h1Theme' style={{color:'#F25C05'}}>Food</span>
+                        <span className='h1Theme'>How</span>
+                        <span className='h1Theme' style={{ color: '#F25C05' }}>Food</span>
                     </Grid>
                     <Grid item xs={3} lg={3}>
                         <span className='h1Theme'>Impacts</span>
                     </Grid>
                     <Grid item xs={3} lg={3}>
                         <span className='h1Theme'>Your</span>
-                        <span className='h1Theme' style={{color:'#F25C05'}}>Mood</span>
+                        <span className='h1Theme' style={{ color: '#F25C05' }}>Mood</span>
                         <span className='h1Theme'>!</span>
                     </Grid>
                     <div>
@@ -100,9 +148,9 @@ const Layout = (props) => {
                     </div>
 
                 </Grid>
-                
+
                 <Grid item xs={6} container justifyContent="center">
-                    <img src={image} className={classes.imgTheme}/>
+                    <img src={image} className={classes.imgTheme} />
                 </Grid>
             </Grid>
             <br />
@@ -110,7 +158,196 @@ const Layout = (props) => {
                 <div className={classes.suTheme}>Daily Suggestions</div>
             </Grid>
             <br></br>
-            <Grid container className={classes.cardLayout}>
+            <div>
+                <div className='carousel'>
+                    <Slider {...settings}>
+                        <Card sx={{ maxWidth: 345 }}>
+                            <CardHeader
+                                action={
+                                    <IconButton aria-label="settings">
+                                        <MoreVertIcon />
+                                    </IconButton>
+                                }
+                                title={index.title}
+                                subheader={index.category}
+                            />
+                            <CardMedia
+                                component="img"
+                                height="194"
+                                image={imge1}
+                                alt="Paella dish"
+                            />
+                            <CardContent>
+                                <Typography variant="body2" color="text.secondary">
+                                    {index.description}
+                                </Typography>
+                            </CardContent>
+                            <CardActions disableSpacing>
+                                <ExpandMore
+                                    expand={expanded}
+                                    onClick={handleExpandClick}
+                                    aria-expanded={expanded}
+                                    aria-label="show more"
+                                >
+                                    <ExpandMoreIcon />
+                                </ExpandMore>
+                            </CardActions>
+                            <Collapse in={expanded} timeout="auto" unmountOnExit>
+                                <CardContent>
+                                    <button className='buttonThemeOrder mt-3' id={index.id} onClick={e => handleClick(e)}>Explore More</button>
+                                </CardContent>
+                            </Collapse>
+                        </Card>
+                        <Card sx={{ maxWidth: 345 }}>
+                            <CardHeader
+                                action={
+                                    <IconButton aria-label="settings">
+                                        <MoreVertIcon />
+                                    </IconButton>
+                                }
+                                title={index.title}
+                                subheader={index.category}
+                            />
+                            <CardMedia
+                                component="img"
+                                height="194"
+                                image={imge2}
+                                alt="Paella dish"
+                            />
+                            <CardContent>
+                                <Typography variant="body2" color="text.secondary">
+                                    {index.description}
+                                </Typography>
+                            </CardContent>
+                            <CardActions disableSpacing>
+                                <ExpandMore
+                                    expand={expanded}
+                                    onClick={handleExpandClick}
+                                    aria-expanded={expanded}
+                                    aria-label="show more"
+                                >
+                                    <ExpandMoreIcon />
+                                </ExpandMore>
+                            </CardActions>
+                            <Collapse in={expanded} timeout="auto" unmountOnExit>
+                                <CardContent>
+                                    <button className='buttonThemeOrder mt-3' id={index.id} onClick={e => handleClick(e)}>Explore More</button>
+                                </CardContent>
+                            </Collapse>
+                        </Card>
+                        <Card sx={{ maxWidth: 345 }}>
+                            <CardHeader
+                                action={
+                                    <IconButton aria-label="settings">
+                                        <MoreVertIcon />
+                                    </IconButton>
+                                }
+                                title={index.title}
+                                subheader={index.category}
+                            />
+                            <CardMedia
+                                component="img"
+                                height="194"
+                                image={imge3}
+                                alt="Paella dish"
+                            />
+                            <CardContent>
+                                <Typography variant="body2" color="text.secondary">
+                                    {index.description}
+                                </Typography>
+                            </CardContent>
+                            <CardActions disableSpacing>
+                                <ExpandMore
+                                    expand={expanded}
+                                    onClick={handleExpandClick}
+                                    aria-expanded={expanded}
+                                    aria-label="show more"
+                                >
+                                    <ExpandMoreIcon />
+                                </ExpandMore>
+                            </CardActions>
+                            <Collapse in={expanded} timeout="auto" unmountOnExit>
+                                <CardContent>
+                                    <button className='buttonThemeOrder mt-3' id={index.id} onClick={e => handleClick(e)}>Explore More</button>
+                                </CardContent>
+                            </Collapse>
+                        </Card>
+                        <Card sx={{ maxWidth: 345 }}>
+                            <CardHeader
+                                action={
+                                    <IconButton aria-label="settings">
+                                        <MoreVertIcon />
+                                    </IconButton>
+                                }
+                                title={index.title}
+                                subheader={index.category}
+                            />
+                            <CardMedia
+                                component="img"
+                                height="194"
+                                image={imge}
+                                alt="Paella dish"
+                            />
+                            <CardContent>
+                                <Typography variant="body2" color="text.secondary">
+                                    {index.description}
+                                </Typography>
+                            </CardContent>
+                            <CardActions disableSpacing>
+                                <ExpandMore
+                                    expand={expanded}
+                                    onClick={handleExpandClick}
+                                    aria-expanded={expanded}
+                                    aria-label="show more"
+                                >
+                                    <ExpandMoreIcon />
+                                </ExpandMore>
+                            </CardActions>
+                            <Collapse in={expanded} timeout="auto" unmountOnExit>
+                                <CardContent>
+                                    <button className='buttonThemeOrder mt-3' id={index.id} onClick={e => handleClick(e)}>Explore More</button>
+                                </CardContent>
+                            </Collapse>
+                        </Card>
+                        {/* <div className='card-wrapper'>
+                            <div className='card'>
+                                <div className='card-image'>
+                                    <img src={imge1}></img>
+                                </div>
+                            </div>
+                        </div>
+                        <div className='card-wrapper'>
+                            <div className='card'>
+                                <div className='card-image'>
+                                    <img src={imge2}></img>
+                                </div>
+                            </div>
+                        </div>
+                        <div className='card-wrapper'>
+                            <div className='card'>
+                                <div className='card-image'>
+                                    <img src={imge3}></img>
+                                </div>
+                            </div>
+                        </div>
+                        <div className='card-wrapper'>
+                            <div className='card'>
+                                <div className='card-image'>
+                                    <img src={imge}></img>
+                                </div>
+                            </div>
+                        </div>
+                        <div className='card-wrapper'>
+                            <div className='card'>
+                                <div className='card-image'>
+                                    <img src={imge1}></img>
+                                </div>
+                            </div>
+                        </div> */}
+                    </Slider>
+                </div>
+            </div>
+            {/* <Grid container className={classes.cardLayout}>
                 <Grid item xs={3} >
                     <Card sx={{ maxWidth: 240 }} className={classes.cardL}>
                         <CardActionArea>
@@ -122,7 +359,7 @@ const Layout = (props) => {
                             />
                             <CardContent>
                                 <Typography gutterBottom variant="h5" component="div">
-                                Pomegranate, ricotta and walnut spaghetti
+                                    Pomegranate, ricotta and walnut spaghetti
                                 </Typography>
                             </CardContent>
                         </CardActionArea>
@@ -156,7 +393,7 @@ const Layout = (props) => {
                             />
                             <CardContent>
                                 <Typography gutterBottom variant="h5" component="div">
-                                All-in-one vegie pasta
+                                    All-in-one vegie pasta
                                 </Typography>
                             </CardContent>
                         </CardActionArea>
@@ -179,8 +416,8 @@ const Layout = (props) => {
                         </CardActionArea>
                     </Card>
                 </Grid>
-                </Grid>
-            
+            </Grid> */}
+
         </div>
     );
 };

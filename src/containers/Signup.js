@@ -20,6 +20,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import CSRFToken from '../components/CSRFTokens';
 
 const useStyles = makeStyles(theme => ({
     textTheme: {
@@ -77,13 +78,19 @@ const Signup = ({ signup, isAuthenticated }) => {
     const { firstName, lastName, gender, email, phoneNumber, password, re_password } = formData;
 
     const onChange = e => {
+        // console.log(firstName);
         setFormData({ ...formData, [e.target.name]: e.target.value })
         validate({ [e.target.name]: e.target.value })
     }
 
     const onSubmit = e => {
         e.preventDefault();
-        console.log(age,preference);
+        console.log(age);
+        console.log(gender);
+        console.log(lastName);
+        console.log(preference);
+        console.log(email);
+        console.log(phoneNumber);
         console.log(firstName)
         if (password === re_password) {
             signup(firstName, lastName,age, preference, gender,email, phoneNumber, password, re_password);
@@ -118,15 +125,15 @@ const Signup = ({ signup, isAuthenticated }) => {
     ]
 
     const ageGroup = [
-        { label: '10-15', year: 1994 },
-        { label: '16-20', year: 1972 },
-        { label: '21-25', year: 1974 },
-        { label: '26-30', year: 2008 },
-        { label: '31-35', year: 1957 },
-        { label: "36-40", year: 1993 },
-        { label: "41-45", year: 1993 },
-        { label: "46-50", year: 1993 },
-        { label: "50+", year: 1993 }
+        '10-15',
+        '16-20',
+        '21-25',
+        '26-30',
+        '31-35',
+        "36-40",
+        "41-45",
+        "46-50",
+        "50+"
     ]
 
     const [open, setOpen] = React.useState(false);
@@ -150,7 +157,7 @@ const Signup = ({ signup, isAuthenticated }) => {
         }
     }, [open]);
     const cuisine = [
-        'French',
+        "French",
         'Chinese',
         'Thai',
         'Italian',
@@ -184,6 +191,7 @@ const Signup = ({ signup, isAuthenticated }) => {
             <h1 className={classes.h1Theme}>Sign Up</h1>
             <p><b>Create your account</b></p>
             <form onSubmit={e => onSubmit(e)}>
+            <CSRFToken />
                 <Grid container>
                     <Grid item xs={8}>
                         <Grid container spacing={2} >

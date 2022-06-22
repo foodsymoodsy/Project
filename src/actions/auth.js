@@ -1,4 +1,5 @@
 import axios from 'axios';
+import Cookies from 'js-cookie';
 import { 
     LOGIN_SUCCESS,
     LOGIN_FAIL,
@@ -120,7 +121,8 @@ export const load_user = () => async dispatch => {
 export const login = (email,password) => async dispatch => {
     const config = {
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'X-CSRFToken': Cookies.get('csrftoken')
         }
     };
 
@@ -145,7 +147,8 @@ export const login = (email,password) => async dispatch => {
 export const signup = (firstName, lastName,age, preference, gender, email, phoneNumber, password, re_password) => async dispatch => {
     const config = {
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'X-CSRFToken': Cookies.get('csrftoken')
         }
     };
 
@@ -169,7 +172,8 @@ export const signup = (firstName, lastName,age, preference, gender, email, phone
 export const signup2 = (name, email, password, re_password) => async dispatch => {
     const config = {
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'X-CSRFToken': Cookies.get('csrftoken')
         }
     };
 
@@ -193,7 +197,8 @@ export const signup2 = (name, email, password, re_password) => async dispatch =>
 export const verify = (uid,token) => async dispatch => {
     const config = {
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'X-CSRFToken': Cookies.get('csrftoken')
         }
     };
 
