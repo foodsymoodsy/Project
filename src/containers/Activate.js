@@ -24,6 +24,7 @@ const Activate = ({ verify}) =>{
     let {uid,token} = useParams();
     const verify_account= e => {
         e.preventDefault();
+        console.log("hello");
         const userid = uid
         const usertoken = token;
         console.log(userid,usertoken);
@@ -31,7 +32,7 @@ const Activate = ({ verify}) =>{
         setVerified(true);
         // navigate("/");
     }
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
     // if(verified) {
     //     // return <Navigate to = '/' />
     //     navigate("/");
