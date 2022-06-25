@@ -141,7 +141,7 @@ export const login = (email,password) => async dispatch => {
             type: LOGIN_FAIL
         })
     }
-
+    // return email;
 };
 
 export const signup = (firstName, lastName,age,gender, email, phoneNumber, password, re_password) => async dispatch => {
@@ -195,7 +195,7 @@ export const signup2 = (name, email, password, re_password) => async dispatch =>
 
 };
 
-export const verify = (uid,token) => async dispatch => {
+export const verify = (userid,usertoken) => async dispatch => {
     const config = {
         headers: {
             'Content-Type': 'application/json',
@@ -203,7 +203,7 @@ export const verify = (uid,token) => async dispatch => {
         }
     };
 
-    const body = JSON.stringify({uid,token});
+    const body = JSON.stringify({userid,usertoken});
 
     try{
         const res = await axios.post(`${process.env.REACT_APP_API_URL}/auth/users/activation/`,body,config);

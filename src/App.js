@@ -33,8 +33,8 @@ const App=() => (
                 <Route exact path='/password/reset/confirm/:uid/:token' element={<ResetPasswordConfirm/>} />
                 <Route exact path='/activate/:uid/:token' element={<Activate/>} />
                 <Route exact path='/about' element={<About/>} />
-                <Route exact path='/recommendation' element={<Recommendation/>} />
-                <Route exact path='/recommended_food/:mood' element={<RecommendedFood/>} />
+                <Route exact path='/recommendation/:email' element={<Recommendation/>} />
+                <Route exact path='/recommended_food' element={<RecommendedFood/>} />
                 <Route exact path='/recommended_food_for_mood/:id' element={<RecommendedFoodForMood/>} />
                 <Route exact path='/organization' element={<Organization/>} />
             </Routes>

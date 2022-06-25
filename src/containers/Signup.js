@@ -262,7 +262,8 @@ const Signup = ({ signup, isAuthenticated }) => {
                                     )}
                                 />
                             </Grid> */}
-                            <Grid item xs={6}>
+                            <Grid item xs={6}></Grid>
+                            <Grid item xs={6} spacing={2}>
                                 <FormControl>
                                     <FormLabel>Gender</FormLabel>
                                     <MuiRadioGroup row

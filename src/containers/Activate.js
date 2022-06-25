@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import {verify} from '../actions/auth';
 import './Button.css';
 import { makeStyles } from '@material-ui/core';
-import CSRFToken from '../components/CSRFTokens';
+// import CSRFToken from '../components/CSRFTokens';
 import { useNavigate } from "react-router-dom";
 // import { match } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
@@ -21,17 +21,17 @@ const useStyles = makeStyles(theme => ({
 const Activate = ({ verify}) =>{
     const classes = useStyles();
     const [verified, setVerified] = useState(false);
-    let {userid,usertoken} = useParams();
+    let {uid,token} = useParams();
     const verify_account= e => {
         e.preventDefault();
-        const uid = userid
-        const token = usertoken;
-        console.log(uid,token);
-        verify(uid, token);
+        const userid = uid
+        const usertoken = token;
+        console.log(userid,usertoken);
+        verify(userid, usertoken);
         setVerified(true);
         // navigate("/");
     }
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
     // if(verified) {
     //     // return <Navigate to = '/' />
     //     navigate("/");

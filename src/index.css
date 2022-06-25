@@ -311,6 +311,11 @@
   width: 50px;
 }
 
+.gifStyle1{
+  height: 50px;
+  width: 50px;
+}
+
 .footer{
   margin-top: 1rem;
   padding: 1rem;
@@ -323,7 +328,15 @@
 
 .img1{
   height:45px;
+  width:60px;
   margin-left: 5px;
   margin-top: 1px;
   margin-bottom: 20px;
+}
+
+.img1:hover {
+    
+  /* width: '200px', */ 
+  /* height: '200px', */ 
+  transform: scale(1.1)
 }

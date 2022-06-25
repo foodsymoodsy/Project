@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import axios from "axios";
 import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
@@ -36,12 +36,19 @@ const ExpandMore = styled((props) => {
     }),
 }));
 
-const RecommendedFood = () => {
+const RecommendedFood = (props) => {
     //    let {mood} = useParams();
+    const search = useLocation().search;
+    const params = new URLSearchParams(search);
+    let email = params.get('email'); // 
+    let mood = params.get('mood');
+    console.log(email,mood);
     const [data, setData] = useState();
     const classes = useStyles();
     const getData = async () => {
-        let d = await axios.get('https://dummyjson.com/products/');
+        let d = await axios.get('https://dummyjson.com/products/'
+        // ,{params: {email:email,mood:mood}}
+        );
         setData(d.data.products);
         console.log(d.data.products); 
     }

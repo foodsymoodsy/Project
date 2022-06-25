@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from "react-router-dom";
 import { Grid } from '@material-ui/core';
 import axios from 'axios';
-import Navbar from './Navbar';
 import '../index.css';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
@@ -10,7 +9,8 @@ import image from './foodsymoodsy.png';
 import './image.css';
 import { AppBar, Toolbar, makeStyles, useMediaQuery, useTheme, Paper } from '@material-ui/core'
 import Rating from '@mui/material/Rating';
-import '../containers/Button.css'
+import '../containers/Button.css';
+import { NavLink } from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -44,14 +44,15 @@ function RecommendedFoodForMood() {
     const [showModal, setShowModal] = useState(false);
     const [show, setShow] = useState(false);
 
-    const postData=async ()=>{
-        let res=await axios.post(`{baseURL}`,{
+    const postRating = async ()=>{
+        let res =axios.post(`{baseURL}`,{
             rate:rating
         })
         console.log(res);
     }
+
     const handleClose = () => {
-        postData();
+        postRating();
         setShow(false);
     }
     // const handleShow = () => setShow(true);
@@ -98,7 +99,7 @@ function RecommendedFoodForMood() {
                                 </Grid>
                                 <Grid item sm></Grid>
                                 <Grid item >
-                                    <a className={classes.link}>Home</a>
+                                <NavLink to='/' className={classes.link}>Home</NavLink>
                                 </Grid>
 
                             </Grid>
@@ -117,6 +118,7 @@ function RecommendedFoodForMood() {
                         : null}
                     <br />
                     <br />
+                    <br/>
                     <h2 style={{ textAlign: 'center' }} className='mt-20'>{data[id - 1].title}</h2><br />
                     <Grid container >
                         <div >

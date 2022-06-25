@@ -11,6 +11,7 @@ import { Visibility } from '@material-ui/icons';
 import { VisibilityOff } from '@material-ui/icons';
 import image from './google.jpeg';
 import { IconButton } from '@material-ui/core';
+import { useNavigate } from "react-router-dom";
 // import CSRFToken from '../components/CSRFTokens';
 
 const useStyles = makeStyles(theme => ({
@@ -57,6 +58,7 @@ const LoginRecommendation = ({ login, isAuthenticated }) => {
 
 
     const { email, password } = formData;
+    const navigate = useNavigate();
 
     const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value });
 
@@ -75,6 +77,7 @@ const LoginRecommendation = ({ login, isAuthenticated }) => {
     const onSubmit = e => {
         e.preventDefault();
         login(email, password);
+
     };
 
     const continueWithGoogle = async () => {
@@ -88,7 +91,8 @@ const LoginRecommendation = ({ login, isAuthenticated }) => {
     }
 
     if (isAuthenticated) {
-        return <Navigate to='/recommendation' />
+        console.log(email)
+        navigate("/recommendation/"+email);
     }
     return (
         <div className={classes.mainDiv}>
