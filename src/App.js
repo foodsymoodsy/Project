@@ -16,12 +16,14 @@ import Recommendation from './components/Recommendation';
 import RecommendedFood from './components/RecommendedFood';
 import Organization from './components/Organization';
 import RecommendedFoodForMood from './components/RecommendedFoodForMood';
+import Home from './components/Home';
 
 const App=() => (
     <Provider store={store}>
     <Router>
+        <Layout>
             <Routes>
-                <Route exact path='/' element={<Layout/>} />
+                <Route exact path='/' element={<Home/>} />
                 <Route exact path='/loginRecommendation' element={<LoginRecommendation/>} />
                 <Route exact path='/loginDonation' element={<LoginDonation/>} />
                 <Route exact path='/loginOrganization' element={<LoginOrganization/>} />
@@ -36,6 +38,7 @@ const App=() => (
                 <Route exact path='/recommended_food_for_mood/:id' element={<RecommendedFoodForMood/>} />
                 <Route exact path='/organization' element={<Organization/>} />
             </Routes>
+            </Layout>
     </Router>
     </Provider>
 );

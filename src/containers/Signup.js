@@ -91,16 +91,16 @@ const Signup = ({ signup, isAuthenticated }) => {
         console.log(preference);
         console.log(email);
         console.log(phoneNumber);
-        console.log(firstName)
+        console.log(firstName);
         if (password === re_password) {
-            signup(firstName, lastName,age, preference, gender,email, phoneNumber, password, re_password);
-
-            setAccountCreated(true);
+            const res = signup(firstName, lastName,age, preference, gender,email, phoneNumber, password, re_password);
+            console.log(res);
+            // if(res)
+                setAccountCreated(true);
             // handleShowPopup();
         }
-        signup(firstName, lastName,age, preference, gender, email, phoneNumber, password, re_password);
+        // signup(firstName, lastName,age, preference, gender, email, phoneNumber, password, re_password);
     }
-
     const continueWithGoogle = async () => {
         try {
             const res = await axios.get(`${process.env.REACT_APP_API_URL}/auth/o/google-oauth2/?redirect_uri=${process.env.REACT_APP_API_URL}/google`)
@@ -114,10 +114,10 @@ const Signup = ({ signup, isAuthenticated }) => {
     if (isAuthenticated) {
         return <Navigate to='/' />
     }
-    // if (accountCreated) {
-    //     console.log("created");
-    //     // return <Navigate to='/signup_auth' />
-    // }
+    if (accountCreated) {
+        console.log("created");
+        // return <Navigate to='/signup_auth' />
+    }
     const genderItems = [
         { id: 'male', title: 'Male' },
         { id: 'female', title: 'Female' },

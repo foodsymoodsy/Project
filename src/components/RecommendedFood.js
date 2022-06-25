@@ -43,7 +43,7 @@ const RecommendedFood = () => {
     const getData = async () => {
         let d = await axios.get('https://dummyjson.com/products/');
         setData(d.data.products);
-        console.log(d.data.products);
+        console.log(d.data.products); 
     }
     useEffect(() => {
         getData();

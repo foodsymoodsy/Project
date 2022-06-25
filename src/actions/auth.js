@@ -153,9 +153,9 @@ export const signup = (firstName, lastName,age, preference, gender, email, phone
     };
 
     const body = JSON.stringify({firstName, lastName,age, preference, gender, email, phoneNumber, password, re_password});
-
+    var res;
     try{
-        const res = await axios.post(`${process.env.REACT_APP_API_URL}/auth/users/`,body,config);
+        res = await axios.post(`${process.env.REACT_APP_API_URL}/auth/users/`,body,config);
 
         dispatch({
             type:SIGNUP_SUCCESS,
@@ -166,7 +166,8 @@ export const signup = (firstName, lastName,age, preference, gender, email, phone
             type: SIGNUP_FAIL
         })
     }
-
+    console.log(res);
+    // return res;
 };
 
 export const signup2 = (name, email, password, re_password) => async dispatch => {
@@ -205,7 +206,8 @@ export const verify = (uid,token) => async dispatch => {
     const body = JSON.stringify({uid,token});
 
     try{
-        await axios.post(`${process.env.REACT_APP_API_URL}/auth/users/activation/`,body,config);
+        const res = await axios.post(`${process.env.REACT_APP_API_URL}/auth/users/activation/`,body,config);
+        console.log(res);
 
         dispatch({
             type:ACTIVATION_SUCCESS,

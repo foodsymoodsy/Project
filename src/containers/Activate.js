@@ -4,6 +4,10 @@ import {connect} from 'react-redux';
 import {verify} from '../actions/auth';
 import './Button.css';
 import { makeStyles } from '@material-ui/core';
+import CSRFToken from '../components/CSRFTokens';
+import { useNavigate } from "react-router-dom";
+// import { match } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
     mainDiv: {
@@ -14,33 +18,44 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-const Activate = ({ verify, match }) =>{
+const Activate = ({ verify}) =>{
     const classes = useStyles();
     const [verified, setVerified] = useState(false);
+    let {userid,usertoken} = useParams();
     const verify_account= e => {
-        const uid = match.params.uid;
-        const token = match.params.token;
+        e.preventDefault();
+        const uid = userid
+        const token = usertoken;
+        console.log('uid,token');
         verify(uid, token);
         setVerified(true);
+        // navigate("/");
     }
-
+    const navigate = useNavigate();
     if(verified) {
-        return <Navigate to = '/' />
+        // return <Navigate to = '/' />
+        navigate("/");
     }
+    // const handleClick=()=>{
+    //     return <Navigate to = '/'/>
+    // }
     return (
         <div className={classes.mainDiv}>
            <div 
                 className='d-flex flex-column justify-content-center align-items-center'
             >
                 <h1>Verify your account:</h1>
+            <form onSubmit={verify_account}>
+            {/* <CSRFToken/> */}
             <button
-                onClick={verify_account}
                 style={{ marginTop: '50px' }}
-                type='button'
+                type='submit'
                 className='signupBtnTheme1'
+                // onClick={handleClick}
             >
                 Verify
             </button>
+            </form>
            </div>
         </div>
 

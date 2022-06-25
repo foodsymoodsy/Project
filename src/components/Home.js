@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import { connect } from 'react-redux';
-import { checkAuthenticated, load_user, googleAuthenticate } from '../actions/auth';
 import queryString from 'query-string';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -10,13 +9,13 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 import { Grid } from '@material-ui/core';
-import imge from './Pomegranate, ricotta and walnut spaghetti.jpg';
-import imge1 from './Wicked cheese sauce.jpg';
-import imge2 from './All-in-one veggie pasta.jpg';
-import imge3 from './Cream cheese and avocado roll.jpg';
+import imge from '../hocs/Pomegranate, ricotta and walnut spaghetti.jpg';
+import imge1 from '../hocs/Wicked cheese sauce.jpg';
+import imge2 from '../hocs/All-in-one veggie pasta.jpg';
+import imge3 from '../hocs/Cream cheese and avocado roll.jpg';
 import { makeStyles } from '@material-ui/core';
 import '../index.css';
-import image from './homePagepic.png';
+import image from '../hocs/homePagepic.png';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
@@ -29,102 +28,86 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { styled } from '@mui/material/styles';
 import { useNavigate } from "react-router-dom";
 
-// const useStyles = makeStyles(theme => ({
-//     // centered: {
-//     //     position: 'absolute',
-//     //     top: '50%',
-//     //     left: '50%',
-//     //     transform: 'translate(-50% -50%)',
-//     //     fontSize: '100px'
-//     // }
-//     cardLayout: {
-//         marginLeft: '30px',
-
-//     },
-//     cardLayout1: {
-//         marginLeft: '10px',
-
-//     },
-//     cardL: {
-//         borderRadius: '10px',
-//         height: '95%'
-//     },
-//     suTheme: {
-//         fontFamily: "Gotham",
-//         color: '#F25C05',
-//         marginTop: '70px',
-//         marginLeft: '30px',
-//         marginRight: '10px',
-//         letterSpacing: '3px',
-//         fontSize: '3em'
-//     },
-//     imgTheme: {
-//         marginTop: '40px'
-//     }
-
-// }))
-
-const Layout = ({ checkAuthenticated, load_user, children }) => {
-    // const classes = useStyles();
-    // const navigate = useNavigate();
-    // const [index, setIndex] = useState(0);
-
-    // const handleSelect = (selectedIndex, e) => {
-    //     setIndex(selectedIndex);
-    // };
-
-
-    // let location = useLocation();
-    useEffect(() => {
-        // const values = queryString.parse(location.search);
-        // const state = values.state ? values.state : null;
-        // const code = values.code ? values.code : null;
-
-        // console.log('State: ' + state);
-        // console.log('Code: ' + code);
-
-        // if (state && code) {
-        //     props.googleAuthenticate(state, code)
-        // } else {
-            checkAuthenticated();
-            load_user();
-        // }
-    },[]);
-    // const ExpandMore = styled((props) => {
-    //     const { expand, ...other } = props;
-    //     return <IconButton {...other} />;
-    // })(({ theme, expand }) => ({
-    //     transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
-    //     marginLeft: 'auto',
-    //     transition: theme.transitions.create('transform', {
-    //         duration: theme.transitions.duration.shortest,
-    //     }),
-    // }));
-    // const [expanded, setExpanded] = React.useState(false);
-
-    // const handleExpandClick = () => {
-    //     setExpanded(!expanded);
-    // };
-    // const handleClick = (e) =>{
-    //     e.preventDefault()
-    //     let id = e.target.id;
-    //     navigate("/recommended_food_for_mood/"+id);
+const useStyles = makeStyles(theme => ({
+    // centered: {
+    //     position: 'absolute',
+    //     top: '50%',
+    //     left: '50%',
+    //     transform: 'translate(-50% -50%)',
+    //     fontSize: '100px'
     // }
-    // const settings = {
-    //     // className: "center",
-    //     dots: true,
-    //     infinite: true,
-    //     speed: 500,
-    //     // centerPadding: "60px",
-    //     slidesToShow: 3,
-    //     slidesToScroll: 1,
-    //     cssEase: "linear"
-    // }
+    cardLayout: {
+        marginLeft: '30px',
+
+    },
+    cardLayout1: {
+        marginLeft: '10px',
+
+    },
+    cardL: {
+        borderRadius: '10px',
+        height: '95%'
+    },
+    suTheme: {
+        fontFamily: "Gotham",
+        color: '#F25C05',
+        marginTop: '70px',
+        marginLeft: '30px',
+        marginRight: '10px',
+        letterSpacing: '3px',
+        fontSize: '3em'
+    },
+    imgTheme: {
+        marginTop: '40px'
+    }
+
+}))
+
+const Home = () => {
+    const classes = useStyles();
+    const navigate = useNavigate();
+    const [index, setIndex] = useState(0);
+
+    const handleSelect = (selectedIndex, e) => {
+        setIndex(selectedIndex);
+    };
+
+
+    let location = useLocation();
+    const ExpandMore = styled((props) => {
+        const { expand, ...other } = props;
+        return <IconButton {...other} />;
+    })(({ theme, expand }) => ({
+        transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
+        marginLeft: 'auto',
+        transition: theme.transitions.create('transform', {
+            duration: theme.transitions.duration.shortest,
+        }),
+    }));
+    const [expanded, setExpanded] = React.useState(false);
+
+    const handleExpandClick = () => {
+        setExpanded(!expanded);
+    };
+    const handleClick = (e) =>{
+        e.preventDefault()
+        let id = e.target.id;
+        navigate("/recommended_food_for_mood/"+id);
+    }
+    const settings = {
+        // className: "center",
+        dots: true,
+        infinite: true,
+        speed: 500,
+        // centerPadding: "60px",
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        cssEase: "linear"
+    }
     return (
         <div>
-            {/* <Navbar /> */}
-            {children}
-            {/* <br />
+            <Navbar />
+            <br />
             <br />
             <br />
             <Grid container >
@@ -309,7 +292,7 @@ const Layout = ({ checkAuthenticated, load_user, children }) => {
                                     <button className='buttonThemeOrder mt-3' id={index.id} onClick={e => handleClick(e)}>Explore More</button>
                                 </CardContent>
                             </Collapse>
-                        </Card> */}
+                        </Card>
                         {/* <div className='card-wrapper'>
                             <div className='card'>
                                 <div className='card-image'>
@@ -345,9 +328,9 @@ const Layout = ({ checkAuthenticated, load_user, children }) => {
                                 </div>
                             </div>
                         </div> */}
-                    {/* </Slider>
+                    </Slider>
                 </div>
-            </div> */}
+            </div>
             {/* <Grid container className={classes.cardLayout}>
                 <Grid item xs={3} >
                     <Card sx={{ maxWidth: 240 }} className={classes.cardL}>
@@ -423,4 +406,4 @@ const Layout = ({ checkAuthenticated, load_user, children }) => {
     );
 };
 
-export default connect(null, { checkAuthenticated, load_user, googleAuthenticate })(Layout);
+export default Home;
