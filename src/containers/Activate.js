@@ -26,16 +26,16 @@ const Activate = ({ verify}) =>{
         e.preventDefault();
         const uid = userid
         const token = usertoken;
-        console.log('uid,token');
+        console.log(uid,token);
         verify(uid, token);
         setVerified(true);
         // navigate("/");
     }
     const navigate = useNavigate();
-    if(verified) {
-        // return <Navigate to = '/' />
-        navigate("/");
-    }
+    // if(verified) {
+    //     // return <Navigate to = '/' />
+    //     navigate("/");
+    // }
     // const handleClick=()=>{
     //     return <Navigate to = '/'/>
     // }

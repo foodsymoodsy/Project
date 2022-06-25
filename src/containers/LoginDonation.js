@@ -11,7 +11,7 @@ import { Visibility } from '@material-ui/icons';
 import { VisibilityOff } from '@material-ui/icons';
 import image from './google.jpeg';
 import { IconButton } from '@material-ui/core';
-import CSRFToken from '../components/CSRFTokens';
+// import CSRFToken from '../components/CSRFTokens';
 
 const useStyles = makeStyles(theme => ({
     pageContent: {
@@ -97,7 +97,7 @@ const LoginDonation = ({ login, isAuthenticated }) => {
     return (
         <div className={classes.mainDiv} >
             <form onSubmit={e => onSubmit(e)}>
-            <CSRFToken />
+            {/* <CSRFToken /> */}
                 <Grid container justifyContent="center">
                     <Grid item >
                         <Grid container justifyContent='center'>

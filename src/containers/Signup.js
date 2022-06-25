@@ -20,7 +20,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import CSRFToken from '../components/CSRFTokens';
+// import CSRFToken from '../components/CSRFTokens';
 
 const useStyles = makeStyles(theme => ({
     textTheme: {
@@ -93,7 +93,7 @@ const Signup = ({ signup, isAuthenticated }) => {
         console.log(phoneNumber);
         console.log(firstName);
         if (password === re_password) {
-            const res = signup(firstName, lastName,age, preference, gender,email, phoneNumber, password, re_password);
+            const res = signup(firstName, lastName,age, gender,email, phoneNumber, password, re_password);
             console.log(res);
             // if(res)
                 setAccountCreated(true);
@@ -191,7 +191,7 @@ const Signup = ({ signup, isAuthenticated }) => {
             <h1 className={classes.h1Theme}>Sign Up</h1>
             <p><b>Create your account</b></p>
             <form onSubmit={e => onSubmit(e)}>
-            <CSRFToken />
+            {/* <CSRFToken /> */}
                 <Grid container>
                     <Grid item xs={8}>
                         <Grid container spacing={2} >
@@ -231,7 +231,7 @@ const Signup = ({ signup, isAuthenticated }) => {
                                     renderInput={(params) => <TextField {...params} variant="standard" label="Age Group" />}
                                 />
                             </Grid>
-                            <Grid xs={6}>
+                            {/* <Grid xs={6}>
                                 <Autocomplete
                                     multiple
                                     id="checkboxes-tags-demo"
@@ -261,7 +261,7 @@ const Signup = ({ signup, isAuthenticated }) => {
                                         <TextField {...params} label="Cuisine Preferences" placeholder="Favorites" />
                                     )}
                                 />
-                            </Grid>
+                            </Grid> */}
                             <Grid item xs={6}>
                                 <FormControl>
                                     <FormLabel>Gender</FormLabel>

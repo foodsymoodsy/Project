@@ -44,7 +44,16 @@ function RecommendedFoodForMood() {
     const [showModal, setShowModal] = useState(false);
     const [show, setShow] = useState(false);
 
-    const handleClose = () => setShow(false);
+    const postData=async ()=>{
+        let res=await axios.post(`{baseURL}`,{
+            rate:rating
+        })
+        console.log(res);
+    }
+    const handleClose = () => {
+        postData();
+        setShow(false);
+    }
     // const handleShow = () => setShow(true);
 
     let { id } = useParams();

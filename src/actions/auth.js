@@ -122,7 +122,7 @@ export const login = (email,password) => async dispatch => {
     const config = {
         headers: {
             'Content-Type': 'application/json',
-            'X-CSRFToken': Cookies.get('csrftoken')
+            // 'X-CSRFToken': Cookies.get('csrftoken')
         }
     };
 
@@ -144,15 +144,15 @@ export const login = (email,password) => async dispatch => {
 
 };
 
-export const signup = (firstName, lastName,age, preference, gender, email, phoneNumber, password, re_password) => async dispatch => {
+export const signup = (firstName, lastName,age,gender, email, phoneNumber, password, re_password) => async dispatch => {
     const config = {
         headers: {
             'Content-Type': 'application/json',
-            'X-CSRFToken': Cookies.get('csrftoken')
+            // 'X-CSRFToken': Cookies.get('csrftoken')
         }
     };
 
-    const body = JSON.stringify({firstName, lastName,age, preference, gender, email, phoneNumber, password, re_password});
+    const body = JSON.stringify({firstName, lastName,age, gender, email, phoneNumber, password, re_password});
     var res;
     try{
         res = await axios.post(`${process.env.REACT_APP_API_URL}/auth/users/`,body,config);
@@ -174,7 +174,7 @@ export const signup2 = (name, email, password, re_password) => async dispatch =>
     const config = {
         headers: {
             'Content-Type': 'application/json',
-            'X-CSRFToken': Cookies.get('csrftoken')
+            // 'X-CSRFToken': Cookies.get('csrftoken')
         }
     };
 
@@ -199,7 +199,7 @@ export const verify = (uid,token) => async dispatch => {
     const config = {
         headers: {
             'Content-Type': 'application/json',
-            'X-CSRFToken': Cookies.get('csrftoken')
+            // 'X-CSRFToken': Cookies.get('csrftoken')
         }
     };
 
