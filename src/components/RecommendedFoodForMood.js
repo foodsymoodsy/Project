@@ -59,10 +59,12 @@ function RecommendedFoodForMood() {
 
     let { id } = useParams();
     const [data, setData] = useState();
+    const [ingredients, setIngredients] = useState('');
     const getData = async () => {
-        let d = await axios.get('https://dummyjson.com/products/');
-        setData(d.data.products);
-        console.log(d.data.products);
+        let d = await axios.get('https://api.edamam.com/api/recipes/v2?app_id=7a7402bf&type=public&app_key=5ea5af3285e2a87757aa123562b6a78a%20&q=cheese');
+        setData(d.data.hits);
+        console.log(data);
+        // setIngredients(.map((line,index)=> ingredients+=(index+1)+line+'\n'));
     }
     useEffect(() => {
         getData();
@@ -86,7 +88,6 @@ function RecommendedFoodForMood() {
 
             {data &&
                 <>
-
                     <AppBar className={classes.root} elevation={0} position="fixed" >
                         <Toolbar>
                             {/* {isMobile ? (
@@ -119,21 +120,23 @@ function RecommendedFoodForMood() {
                     <br />
                     <br />
                     <br/>
-                    <h2 style={{ textAlign: 'center' }} className='mt-20'>{data[id - 1].title}</h2><br />
+                    <h2 style={{ textAlign: 'center' }} className='mt-20'>{data[id].recipe.label}</h2><br />
                     <Grid container >
                         <div >
-                            <img src={data[id - 1].images[0]} style={{ height: '101%', width: '101%', marginLeft: '256px' }} />
+                            <img src={data[id].recipe.image} style={{ height: '95%', width: '135%', marginLeft: '256px' }} />
                         </div>
                     </Grid>
-                    <br />
                     <Grid container>
                         <h3 style={{ marginLeft: '256px' }} className='h3Theme'>Ingredients</h3>
                     </Grid>
-                    <p style={{ marginLeft: '256px', fontFamily: 'Noto Sans' }}>{data[id - 1].category}</p>
+                    <pre style={{ marginLeft: '256px', fontFamily: 'Noto Sans' }}>
+                        {data[id].recipe.ingredientLines.map((line,index)=>(index+1+'.\t')+line+'\n')}</pre>
                     <Grid container>
                         <h3 style={{ marginLeft: '256px' }} className='h3Theme'>Method</h3>
                     </Grid>
-                    <p style={{ marginLeft: '256px', fontFamily: 'Noto Sans' }}>{data[id - 1].description}</p>
+                    <p style={{ marginLeft: '256px',marginRight:'222px', fontFamily: 'Noto Sans' }}>
+                    Remove any rinds from hard cheeses. Grate hard cheeses and cut others into 1/2-inch cubes. Place cheese, wine, butter, herbs, and garlic in a food processor and blend until smooth, approximately 2 minutes. Serve immediately or refrigerate for at least 1 hour for a firmer consistency. Fromage Fort can be stored in the refrigerator for up to 1 week.
+                    </p>
                     <button className='swiggyOrder' onClick={e => handleClick(e)}>Order via Swiggy</button>
                     {/* <Navbar/> */}
                     <div className="footer">

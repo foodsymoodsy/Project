@@ -46,11 +46,11 @@ const RecommendedFood = (props) => {
     const [data, setData] = useState();
     const classes = useStyles();
     const getData = async () => {
-        let d = await axios.get('https://dummyjson.com/products/'
+        let d = await axios.get('https://api.edamam.com/api/recipes/v2?app_id=7a7402bf&type=public&app_key=5ea5af3285e2a87757aa123562b6a78a%20&q=cheese'
         // ,{params: {email:email,mood:mood}}
         );
-        setData(d.data.products);
-        console.log(d.data.products); 
+        setData(d.data.hits);
+        console.log(d.data.hits); 
     }
     useEffect(() => {
         getData();
@@ -85,9 +85,9 @@ const RecommendedFood = (props) => {
         <span className='h2Theme' style={{color:'black'}}>Mood</span>
         </Grid>
         </AppBar>
-        <Grid container className='mt-10'>
+        <Grid container className='mt-10' spacing={3}>
             
-            {data && data.map((index,id) => (
+            {data && data.map((food,id) => (
                 //  <Col key={id} xs={12} md={4} lg={3}>
                 <Grid item xs={3} className={classes.grid}>
                 <Card sx={{ maxWidth: 345 }}>
@@ -102,19 +102,19 @@ const RecommendedFood = (props) => {
                       <MoreVertIcon />
                     </IconButton>
                   }
-                  title={index.title}
-                  subheader={index.category}
+                  title={food.recipe.label}
+                  subheader={food.recipe.dishType}
                 />
                 <CardMedia
                   component="img"
                   height="194"
-                  image={index.images[0]}
+                  image={food.recipe.image}
                   alt="Paella dish"
                 />
                 <CardContent>
-                  <Typography variant="body2" color="text.secondary">
+                  {/* <Typography variant="body2" color="text.secondary">
                     {index.description}
-                  </Typography>
+                  </Typography> */}
                 </CardContent>
                 <CardActions disableSpacing>
                   {/* <IconButton aria-label="add to favorites">
@@ -134,7 +134,7 @@ const RecommendedFood = (props) => {
                 </CardActions>
                 <Collapse in={expanded} timeout="auto" unmountOnExit>
                   <CardContent>
-                    <button className='buttonThemeOrder mt-3' id={index.id} onClick={e => handleClick(e)}>Explore More</button>
+                    <button className='buttonThemeOrder mt-3' id={id} onClick={e => handleClick(e)}>Explore More</button>
                   </CardContent>
                 </Collapse>
             </Card>
