@@ -17,6 +17,15 @@ class UserAccountManager(BaseUserManager):
 
         return user
 
+    def email(self,email):
+        return email
+
+    def age(self, age):
+        return age
+
+    def gender(self,gender):
+        return gender
+
 #firstName, lastName,age, preference, gender, email, phoneNumber, password, re_password
 
 
