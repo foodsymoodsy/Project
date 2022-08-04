@@ -9,11 +9,9 @@ import { InputAdornment } from '@material-ui/core';
 import { IconButton } from '@material-ui/core';
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
-import Checkbox from '@mui/material/Checkbox';
 import Autocomplete from '@mui/material/Autocomplete';
 import { FormControl, FormLabel, RadioGroup as MuiRadioGroup, FormControlLabel, Radio } from '@material-ui/core';
 import './Button.css';
-import image from './google.jpeg';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -39,11 +37,6 @@ const useStyles = makeStyles(theme => ({
     },
 
 }))
-const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
-const checkedIcon = <CheckBoxIcon fontSize="small" />;
-
-
-
 const Signup = ({ signup, isAuthenticated }) => {
     const classes = useStyles();
     const [accountCreated, setAccountCreated] = useState(false);
@@ -52,7 +45,6 @@ const Signup = ({ signup, isAuthenticated }) => {
     const [age, setAge] = useState('');
     const [showPopup, setShowPopup] = useState(false);
     const handleClosePopup = () => setShowPopup(false);
-    const handleShowPopup = () => setShowPopup(true);
     const [formData, setFormData] = useState({
         firstName: '',
         lastName: '',
@@ -156,16 +148,6 @@ const Signup = ({ signup, isAuthenticated }) => {
             }
         }
     }, [open]);
-    const cuisine = [
-        "French",
-        'Chinese',
-        'Thai',
-        'Italian',
-        'Indian',
-        'Spanish',
-        'Continental'
-    ]
-
     const validate = (fieldValues = values) => {
         let temp = { ...errors }
         if ('firstName' in fieldValues)
@@ -177,14 +159,14 @@ const Signup = ({ signup, isAuthenticated }) => {
         if ('password' in fieldValues)
             temp.password = (/^.*(?=.{8,})(?=.*[a-zA-Z])(?=.*\d)(?=.*[!#$%&@? "]).*/).test(fieldValues.password) ? "" : "Password is not valid."
         if ('re_password' in fieldValues) {
-            temp.re_password = formData.password == fieldValues.re_password ? "" : "Password does not match."
+            temp.re_password = formData.password === fieldValues.re_password ? "" : "Password does not match."
         }
         setErrors({
             ...temp
         })
 
         if (fieldValues == values)
-            return Object.values(temp).every(x => x == "")
+            return Object.values(temp).every(x => x === "")
     }
     return (
         <div className='container mt-3'>

@@ -46,9 +46,6 @@ const Recommendation = () =>{
         <div>
             <Navbar />
             <br />
-            <br />
-            <br />
-            <br />
             <Grid container >
                     <Grid item lg={3}>
                     <span className='h2Theme1' style={{marginLeft:'240px'}}>How're</span>

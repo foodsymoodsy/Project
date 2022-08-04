@@ -106,14 +106,14 @@ const ResetPasswordConfirm = ({ match, reset_password_confirm }) => {
         if ('new_password' in fieldValues)
             temp.new_password = (/^.*(?=.{8,})(?=.*[a-zA-Z])(?=.*\d)(?=.*[!#$%&@? "]).*/).test(fieldValues.new_password) ? "" : "Password is not valid."
         if ('re_new_password' in fieldValues) {
-            temp.re_new_password = formData.new_password == fieldValues.re_new_password ? "" : "Password is not valid."
+            temp.re_new_password = formData.new_password === fieldValues.re_new_password ? "" : "Password is not valid."
         }
         setErrors({
             ...temp
         })
 
-        if (fieldValues == values)
-            return Object.values(temp).every(x => x == "")
+        if (fieldValues === values)
+            return Object.values(temp).every(x => x === "")
     }
 
     return (

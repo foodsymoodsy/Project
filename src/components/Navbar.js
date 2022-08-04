@@ -1,9 +1,8 @@
 import React, { Fragment, useState } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { logout } from '../actions/auth';
 import { AppBar, Toolbar, Grid, makeStyles, useMediaQuery, useTheme, Paper } from '@material-ui/core'
-import About from './About';
 import DrawerComponent from './Drawer';
 import { Modal } from 'react-bootstrap';
 import { useNavigate } from "react-router-dom";
@@ -32,7 +31,7 @@ const useStyles = makeStyles(theme => ({
         padding: '0.1rem',
         height: '100 %',
         cursor: 'pointer',
-        fontFamily:'Gotham',
+        fontFamily: 'Gotham',
         '&.active': {
             color: '#F25C05'
         },
@@ -49,11 +48,6 @@ const Navbar = ({ logout, isAuthenticated }) => {
     const classes = useStyles();
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down("md"));
-    const guestLinks = () => (
-        <Fragment>
-
-        </Fragment>
-    );
     const [showSignup, setShowSignup] = useState(false);
     const [showLogin, setShowLogin] = useState(false);
     const navigate = useNavigate();
@@ -86,14 +80,37 @@ const Navbar = ({ logout, isAuthenticated }) => {
         handleCloseLogin();
         navigate("/loginOrganization")
     };
+    const handleLogout = e => {
+        e.preventDefault();
+        logout();
+    }
+    const guestLinks = () => (
+        <Fragment>
+            {/* <li className='nav-item'>
+                <NavLink className='nav-link' to='/signup'>Sign Up</NavLink>
+            </li> */}
+            {/* <li className='nav-item'>
+                <NavLink className='nav-link' to='/signin'>Sign Ip</NavLink>
+            </li> */}
+             <Grid item xs={1}>
+                <a className={classes.link} onClick={handleClickSignup1} >Sign Up</a>
+            </Grid>
+            <Grid item xs={1}>
+                <a className={classes.link} onClick={handleClickLogin1}>Sign In</a>
+            </Grid>
+        </Fragment>
+    );
     const authLinks = () => (
-        <li className='nav-item'>
-            <a className='nav-link' href='#!' onClick={logout}>Logout</a>
-        </li>
+        // <li className='nav-item'>
+        //     <a className='nav-link' href='#!' onClick={logout}>Logout</a>
+        // </li>
+    <Grid item xs={1}>
+            <a className={classes.link} onClick={handleLogout}>Sign Out</a>
+    </Grid>
     );
     return (
         <div>
-            <AppBar className={classes.root} elevation={0} position="absolute" >
+            <AppBar className={classes.root} elevation={0} position="static" >
                 <Toolbar>
                     {isMobile ? (
                         <DrawerComponent />
@@ -105,9 +122,10 @@ const Navbar = ({ logout, isAuthenticated }) => {
                             </Grid>
                             <Grid item sm></Grid>
                             <Grid item xs={1}>
-                            <a className={classes.link}>Home</a>
+                                <a className={classes.link}>Home</a>
                             </Grid>
-                            <Grid item xs={1}>
+                            {isAuthenticated ? authLinks() : guestLinks()}
+                            {/* <Grid item xs={1}>
                                 <a className={classes.link} onClick={handleShowSignup}>Sign Up</a>
                                 <Modal show={showSignup} onHide={handleCloseSignup} centered>
                                     <Modal.Header closeButton >
@@ -131,8 +149,8 @@ const Navbar = ({ logout, isAuthenticated }) => {
                                     </Modal.Body>
                                     <Modal.Footer></Modal.Footer>
                                 </Modal>
-                            </Grid>
-                            <Grid item xs={1}>
+                            </Grid> */}
+                            {/* <Grid item xs={1}>
                                 <a className={classes.link} onClick={handleShowLogin}>Sign In</a>
                                 <Modal show={showLogin} onHide={handleCloseLogin} centered>
                                     <Modal.Header closeButton>
@@ -161,14 +179,14 @@ const Navbar = ({ logout, isAuthenticated }) => {
                                     </Modal.Body>
                                     <Modal.Footer></Modal.Footer>
                                 </Modal>
-                            </Grid>
+                            </Grid> */}
                             <Grid item xs={1}>
                                 <NavLink to='/about' className={classes.link}>About</NavLink>
                             </Grid>
                         </Grid>)}
                 </Toolbar>
             </AppBar>
-            {isAuthenticated ? authLinks() : guestLinks()}
+
         </div>
     );
 };

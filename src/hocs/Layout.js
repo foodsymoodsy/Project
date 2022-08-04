@@ -1,33 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
-import Navbar from '../components/Navbar';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { checkAuthenticated, load_user, googleAuthenticate } from '../actions/auth';
-import queryString from 'query-string';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
-import { CardActionArea } from '@mui/material';
-import { Grid } from '@material-ui/core';
-import imge from './Pomegranate, ricotta and walnut spaghetti.jpg';
-import imge1 from './Wicked cheese sauce.jpg';
-import imge2 from './All-in-one veggie pasta.jpg';
-import imge3 from './Cream cheese and avocado roll.jpg';
-import { makeStyles } from '@material-ui/core';
-import '../index.css';
-import image from './homePagepic.png';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import Slider from "react-slick";
-import CardHeader from '@mui/material/CardHeader';
-import CardActions from '@mui/material/CardActions';
-import Collapse from '@mui/material/Collapse';
-import IconButton from '@mui/material/IconButton';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
-import { styled } from '@mui/material/styles';
-import { useNavigate } from "react-router-dom";
 
 // const useStyles = makeStyles(theme => ({
 //     // centered: {

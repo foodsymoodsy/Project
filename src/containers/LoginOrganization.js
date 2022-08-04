@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, Navigate } from 'react-router-dom';
-import { Grid, makeStyles, Button as MuiButton } from '@material-ui/core';
+import { Grid, makeStyles } from '@material-ui/core';
 import { TextField } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { login } from '../actions/auth';
@@ -9,7 +9,6 @@ import './Button.css';
 import { InputAdornment } from '@material-ui/core';
 import { Visibility } from '@material-ui/icons';
 import { VisibilityOff } from '@material-ui/icons';
-import image from './google.jpeg';
 import { IconButton } from '@material-ui/core';
 // import CSRFToken from '../components/CSRFTokens';
 
@@ -57,8 +56,6 @@ const LoginOrganization = ({ login, isAuthenticated }) => {
 
 
     const { email, password } = formData;
-
-    const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value });
 
     const handleChange = (prop) => (event) => {
         setValues({ ...values, [prop]: event.target.value });

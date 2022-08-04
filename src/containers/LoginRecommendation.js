@@ -64,6 +64,7 @@ const LoginRecommendation = ({ login, isAuthenticated }) => {
 
     const handleChange = (prop) => (event) => {
         setValues({ ...values, [prop]: event.target.value });
+        // console.log(values);
     };
 
 
@@ -76,7 +77,9 @@ const LoginRecommendation = ({ login, isAuthenticated }) => {
 
     const onSubmit = e => {
         e.preventDefault();
-        login(email, password);
+        console.log(values.email,values.password);
+        console.log('hello');
+        login(values.email, values.password);
 
     };
 
@@ -92,7 +95,7 @@ const LoginRecommendation = ({ login, isAuthenticated }) => {
 
     if (isAuthenticated) {
         console.log(email)
-        navigate("/recommendation/"+email);
+        navigate("/recommendation:email/"+email);
     }
     return (
         <div className={classes.mainDiv}>

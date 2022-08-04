@@ -3,14 +3,14 @@ import { useParams } from "react-router-dom";
 import { Grid } from '@material-ui/core';
 import axios from 'axios';
 import '../index.css';
-import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import image from './foodsymoodsy.png';
 import './image.css';
-import { AppBar, Toolbar, makeStyles, useMediaQuery, useTheme, Paper } from '@material-ui/core'
+import { AppBar, Toolbar, makeStyles, useMediaQuery } from '@material-ui/core'
 import Rating from '@mui/material/Rating';
 import '../containers/Button.css';
 import { NavLink } from 'react-router-dom';
+import Navbar from './Navbar';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -41,7 +41,6 @@ const useStyles = makeStyles(theme => ({
 
 function RecommendedFoodForMood() {
     const classes = useStyles();
-    const [showModal, setShowModal] = useState(false);
     const [show, setShow] = useState(false);
 
     const postRating = async ()=>{
@@ -59,7 +58,6 @@ function RecommendedFoodForMood() {
 
     let { id } = useParams();
     const [data, setData] = useState();
-    const [ingredients, setIngredients] = useState('');
     const getData = async () => {
         let d = await axios.get('https://api.edamam.com/api/recipes/v2?app_id=7a7402bf&type=public&app_key=5ea5af3285e2a87757aa123562b6a78a%20&q=cheese');
         setData(d.data.hits);
@@ -88,12 +86,13 @@ function RecommendedFoodForMood() {
 
             {data &&
                 <>
-                    <AppBar className={classes.root} elevation={0} position="fixed" >
+                <Navbar/>
+                    {/* <AppBar className={classes.root} elevation={0} position="fixed" >
                         <Toolbar>
                             {/* {isMobile ? (
                                 <DrawerComponent />
                             ) : ( */}
-                            <Grid container
+                            {/* <Grid container
                                 alignItems="center">
                                 <Grid item>
                                     <img src={image} className='img1' />
@@ -105,8 +104,8 @@ function RecommendedFoodForMood() {
 
                             </Grid>
                             {/* )} */}
-                        </Toolbar>
-                    </AppBar>
+                        {/* </Toolbar> */}
+                    {/* </AppBar> */}
                     {show ? <Modal show={show} onHide={handleClose}>
                         <Modal.Header closeButton centered>
                             <Modal.Title className={classes.rate}>Rate it</Modal.Title>

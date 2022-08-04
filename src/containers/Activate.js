@@ -1,5 +1,4 @@
 import React,{useState} from 'react';
-import {Navigate} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {verify} from '../actions/auth';
 import './Button.css';
@@ -32,7 +31,6 @@ const Activate = ({ verify}) =>{
         setVerified(true);
         // navigate("/");
     }
-    const navigate = useNavigate();
     // if(verified) {
     //     // return <Navigate to = '/' />
     //     navigate("/");

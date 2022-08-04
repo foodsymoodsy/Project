@@ -1,13 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import Navbar from '../components/Navbar';
-import { connect } from 'react-redux';
-import queryString from 'query-string';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import { CardActionArea } from '@mui/material';
 import { Grid } from '@material-ui/core';
 import imge from '../hocs/Pomegranate, ricotta and walnut spaghetti.jpg';
 import imge1 from '../hocs/Wicked cheese sauce.jpg';
@@ -68,12 +65,6 @@ const Home = () => {
     const navigate = useNavigate();
     const [index, setIndex] = useState(0);
 
-    const handleSelect = (selectedIndex, e) => {
-        setIndex(selectedIndex);
-    };
-
-
-    let location = useLocation();
     const ExpandMore = styled((props) => {
         const { expand, ...other } = props;
         return <IconButton {...other} />;

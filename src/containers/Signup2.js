@@ -3,7 +3,7 @@ import { Link, Navigate } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { signup2 } from '../actions/auth';
 import axios from 'axios';
-import { Grid, TextField, Paper, makeStyles } from '@material-ui/core';
+import { Grid, TextField, makeStyles } from '@material-ui/core';
 import { VisibilityOff, Visibility } from '@material-ui/icons';
 import { InputAdornment } from '@material-ui/core';
 import { IconButton } from '@material-ui/core';
@@ -42,9 +42,6 @@ const Signup2 = ({ signup2, isAuthenticated }) => {
     const classes = useStyles();
     const [accountCreated, setAccountCreated] = useState(false);
     const [errors, setErrors] = useState({});
-    const [showPopup, setShowPopup] = useState(false);
-    const handleClosePopup = () => setShowPopup(false);
-    const handleShowPopup = () => setShowPopup(true);
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -118,14 +115,14 @@ const Signup2 = ({ signup2, isAuthenticated }) => {
         if ('password' in fieldValues)
             temp.password = (/^.*(?=.{8,})(?=.*[a-zA-Z])(?=.*\d)(?=.*[!#$%&@? "]).*/).test(fieldValues.password) ? "" : "Password is not valid."
         if ('re_password' in fieldValues) {
-            temp.re_password = formData.password == fieldValues.re_password ? "" : "Password is not valid."
+            temp.re_password = formData.password === fieldValues.re_password ? "" : "Password is not valid."
         }
         setErrors({
             ...temp
         })
 
-        if (fieldValues == values)
-            return Object.values(temp).every(x => x == "")
+        if (fieldValues === values)
+            return Object.values(temp).every(x => x === "")
     }
 
     if (isAuthenticated) {
