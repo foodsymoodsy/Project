@@ -13,7 +13,7 @@ urlpatterns = [
     # path('re_details', detailsAPIView),
     # path('daily_sug', ratingAPIView),
     # path(r'^admin/', admin.site.urls),
-    path(r'^auth/users/activate/(?P<uid>[\w-]+)/(?P<token>[\w-]+)/$', UserActivationView.as_view()),
+    # path(r'^auth/users/activation/(?P<uid>[\w-]+)/(?P<token>[\w-]+)/$', UserActivationView.as_view()),
 
 ]
 
