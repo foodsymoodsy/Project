@@ -1,3 +1,4 @@
+from email.mime import image
 import math
 import random
 import requests
@@ -132,17 +133,43 @@ class MoodAPIView(APIView):
             suggestions.update({f"item{dictval}": item})
 
         # print(suggestions)
+        suggested_data={}
+        dish_data={}
+        item_index=-1
+        for item in suggestions:
+            print(suggestions[item])
+            for i in range(0,928):
+                if (data_matrix[i][2] == suggestions[item]):
+                    dish_data["Dish"]=data_matrix[i][2]
+                    dish_data["Recipe Ingredients"]=data_matrix[i][4]
+                    dish_data["Recipe"]=data_matrix[i][5]
+                    dish_data["Image Link"]=data_matrix[i][6]
+                    dish_data["Order Link"]=f"https://www.swiggy.com/search?query={str(data_matrix[i][2]).replace(' ', '+')}"
+                    # print("Dish : ", data_matrix[i][2])
+                    # print("Recipe Ingredients : ",data_matrix[i][4])
+                    # print("Recipe : ",data_matrix[i][5])
+                    # print("Image Link : ",data_matrix[i][6])
+                    # print(f"Order Related dishes via :  https://www.swiggy.com/search?query={str(data_matrix[i][2]).replace(' ', '+')}")
+                    
+                    item_index=item_index+1
+                    suggested_data[f"item{item_index}"]=dish_data
+                    dish_data={}
+                    break
+        
+        # print(suggested_data)
+        print(suggestions)
+
         return Response(
-            suggestions
+            suggested_data
             )
         # content = {'msg' : 'Hello World'}
         # return Response(content)
 class dailyRecommendation(APIView):
     def get(self, request, Format=None):
         
-        return Response(
+       return Response({'msg':'Dish rated Successfully'}, status=status.HTTP_200_OK)
             
-            )
+            
 
 class collaborativeFiltering(APIView):
     def post(self, request, Format=None):

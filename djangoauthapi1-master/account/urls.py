@@ -12,3 +12,5 @@ urlpatterns = [
     path('collaborativeFiltering/',collaborativeFiltering.as_view()),
 
 ]
+
+#localhost:8000/api/user/
